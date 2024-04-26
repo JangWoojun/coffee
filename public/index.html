@@ -22,22 +22,8 @@
       src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
       defer
     ></script>
-    <script src="./assets/js/charts-lines.js" defer></script>
-    <script src="./assets/js/charts-pie.js" defer></script>
-    <script>
-      const input = document.getElementById('searchInput');
-    
-      input.addEventListener('keypress', function(e) {
-        if (e.key === 'Enter') {
-          console.log("1111")
-          const searchValue = input.value.trim().toLowerCase();
-          const encodedSearchValue = encodeURIComponent(searchValue);
-          window.location.href = "http://www.google.com/search?q=" + encodedSearchValue;
-        }
-      });
-    </script>    
   </head>
-  <body>
+  <body>  
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
       :class="{ 'overflow-hidden': isSideMenuOpen }"
@@ -489,5 +475,18 @@
         </main>
       </div>
     </div>
+    <script>
+      const input = document.getElementById('searchInput');
+    
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const searchValue = input.value.trim().toLowerCase();
+          const encodedSearchValue = encodeURIComponent(searchValue);
+          const searchUrl = "http://www.google.com/search?q=" + encodedSearchValue;
+
+          window.open(searchUrl, '_blank');
+        }
+      });
+    </script>  
   </body>
 </html>
