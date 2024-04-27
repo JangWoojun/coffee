@@ -693,5 +693,19 @@
         </main>
       </div>
     </div>
+    <script>
+      const input = document.getElementById('searchInput');
+    
+      input.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const searchValue = input.value.trim().toLowerCase();
+          const encodedSearchValue = encodeURIComponent(searchValue);
+          const searchUrl = "http://www.google.com/search?q=" + encodedSearchValue;
+
+          window.open(searchUrl, '_blank');
+          input.value = "";
+        }
+      });
+    </script> 
   </body>
 </html>
