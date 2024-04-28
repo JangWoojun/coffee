@@ -347,7 +347,7 @@
                 id="searchInput"
                   class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                   type="text"
-                  placeholder="원하시는 메뉴를 검색하세요"
+                  placeholder="찾으시는 매장 위치를 입력하세요"
                   aria-label="Search"
                 />
               </div>
@@ -504,7 +504,7 @@
         if (e.key === 'Enter') {
           const searchValue = input.value.trim().toLowerCase();
           const encodedSearchValue = encodeURIComponent(searchValue);
-          const searchUrl = "http://www.google.com/search?q=" + encodedSearchValue;
+          const searchUrl = "https://map.naver.com/p/search/더 벤티 " + encodedSearchValue + "  ?c=12.00,0,0,0,dh" ;
 
           window.open(searchUrl, '_blank');
           input.value = "";
