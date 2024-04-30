@@ -1,9 +1,13 @@
+<%@ page language="java" contentType="text/html; UTF=8" pageEncoding="utf-8" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="org.example.Util" %>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>판매등록</title>
+    <title>상품별 판매액</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -35,7 +39,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="index.html"
+                href="./index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -57,13 +61,9 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="db_insert.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -83,9 +83,13 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -107,7 +111,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_sale.html"
+                href="db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -130,7 +134,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_shop.html"
+                href="db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -185,7 +189,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="index.html"
+                href="../index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -207,13 +211,9 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="db_insert.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -233,9 +233,13 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -257,7 +261,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_sale.html"
+                href="db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -280,7 +284,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_shop.html"
+                href="db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -292,7 +296,7 @@
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
                 <span class="ml-4">매장별 판매액</span>
               </a>
@@ -307,7 +311,7 @@
           >
             <!-- Mobile hamburger -->
             <button
-              class="p-1 -ml-1 mr-5 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
+              class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
               @click="toggleSideMenu"
               aria-label="Menu"
             >
@@ -388,16 +392,15 @@
                   </template>
                 </button>
               </li>
-              <!-- Notifications menu -->
             </ul>
           </div>
         </header>
-        <main class="h-full pb-16 overflow-y-auto">
+        <main class="h-full overflow-y-auto">
           <div class="container px-6 mx-auto grid">
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-              판매등록
+              상품별 판매액
             </h2>
             <!-- CTA -->
             <a
@@ -419,80 +422,82 @@
               </div>
               <span>알아보기 &RightArrow;</span>
             </a>
+            <!-- Cards -->
 
-            <!-- General elements -->
-            <div
-              class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
-            >
-              <label class="block text-sm">
-                <span class="text-gray-700 dark:text-gray-400">판매번호</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="ex) 100000"
-                />
-              </label>
-              
-              <label class="block text-sm mt-2">
-                <span class="text-gray-700 dark:text-gray-400">상품코드</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="ex) AA00"
-                />
-              </label>
-
-              <label class="block text-sm mt-2">
-                <span class="text-gray-700 dark:text-gray-400">판매날짜</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="ex) 2018-01-01"
-                />
-              </label>
-
-              <label class="block text-sm mt-2">
-                <span class="text-gray-700 dark:text-gray-400">매장코드</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="ex) S000"
-                />
-              </label>
-
-              <label class="block text-sm mt-2">
-                <span class="text-gray-700 dark:text-gray-400">판매수량</span>
-                <input
-                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
-                  placeholder="ex) 0"
-                />
-              </label>
-
-              <div class="mt-4 text-sm">
-                <span class="text-gray-700 dark:text-gray-400">
-                  타입
-                </span>
-                <div class="mt-2">
-                  <label
-                    class="inline-flex items-center text-gray-600 dark:text-gray-400"
+            <!-- New Table -->
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              <div class="w-full overflow-x-auto">
+                <table class="w-full whitespace-no-wrap">
+                  <thead>
+                    <tr
+                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                    >
+                      <th class="px-4 py-3">상품코드</th>
+                      <th class="px-4 py-3">상품명</th>
+                      <th class="px-4 py-3">상품별 판매액</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                  <a
-                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  href="../index.html"
-                >
-                  등록
-                </a>
-                  </label>
-                  <label
-                    class="inline-flex items-center ml-2   text-gray-600 dark:text-gray-400"
-                  >
-                  <a
-                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
-                  href="../index.html"
-                >
-                  다시쓰기
-                </a>
-                  </label>
-                </div>
+                    <tr class="text-gray-700 dark:text-gray-400">
+                      <%
+                        Connection conn;
+                        Statement stmt;
+
+                        try{
+                          conn = Util.getConnection();
+                          stmt = conn.createStatement();
+
+                          String sql=
+                                  "select c.saleno, c.pcode, c.saledate, c.scode, a.name, c.amount, to_char(a.cost * c.amount,'999,999,999,999') cost "+
+                                          "from "+
+                                          "tbl_product_01 a, "+
+                                          "tbl_shop_01 b, "+
+                                          "tbl_salelist_01 c "+
+                                          "where c.scode = b.scode and c.pcode = a.pcode";
+
+                          ResultSet rs = stmt.executeQuery(sql);
+
+                          while(rs.next()){
+                      %>
+
+                    <tr>
+                      <td class="px-4 py-3 text-sm dark:text-gray-300">
+                        <%=rs.getString("pcode")%>
+                      </td>
+                      <td class="px-4 py-3 text-sm dark:text-gray-300">
+                        <%=rs.getString("name")%>
+                      </td>
+                      <td class="px-4 py-3 text-sm dark:text-gray-300">
+                        <%=rs.getString("cost")%>
+                      </td>
+                    </tr>
+
+                    <%
+                        }
+                      }
+                      catch (Exception e){
+                        e.printStackTrace();
+                      }
+                    %>
+
+                  </tbody>
+                </table>
               </div>
+              <div
+                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
+              >
+                <span class="flex items-center col-span-3">
+                </span>
+                <span class="col-span-2"></span>
+                <!-- Pagination -->
               
+              </div>
             </div>
+
+            <!-- Charts -->
+
           </div>
         </main>
       </div>

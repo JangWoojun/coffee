@@ -1,9 +1,15 @@
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="org.example.Util" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page language="java" contentType="text/html; UTF=8" pageEncoding="utf-8" %>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>더벤티 The Venti</title>
+    <title>매장별 판매액</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -14,23 +20,15 @@
       defer
     ></script>
     <script src="./assets/js/init-alpine.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-      defer
-    ></script>
   </head>
-  <body>  
+  <body>
     <div
       class="flex h-screen bg-gray-50 dark:bg-gray-900"
-      :class="{ 'overflow-hidden': isSideMenuOpen }"
+      :class="{ 'overflow-hidden': isSideMenuOpen}"
     >
       <!-- Desktop sidebar -->
       <aside
-        class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
+        class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block"
       >
         <div class="py-4 text-gray-500 dark:text-gray-400">
           <a
@@ -41,13 +39,9 @@
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="index.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="./index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -71,7 +65,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_insert.html"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -93,7 +87,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                href="./db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -115,7 +109,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_sale.html"
+                href="./db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -136,9 +130,13 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_shop.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -191,13 +189,9 @@
           </a>
           <ul class="mt-6">
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="index.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="../index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -221,7 +215,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_insert.html"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -243,7 +237,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                href="../db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -265,7 +259,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_sale.html"
+                href="db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -286,9 +280,13 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_shop.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -300,7 +298,7 @@
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
                 <span class="ml-4">매장별 판매액</span>
               </a>
@@ -308,7 +306,7 @@
           </ul>
         </div>
       </aside>
-      <div class="flex flex-col flex-1 w-full">
+      <div class="flex flex-col flex-1">
         <header class="z-10 py-4 bg-white shadow-md dark:bg-gray-800">
           <div
             class="container flex items-center justify-between h-full px-6 mx-auto text-purple-600 dark:text-purple-300"
@@ -353,10 +351,10 @@
                 </div>
                 <input
                 id="searchInput"
-                class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
-                type="text"
-                placeholder="찾으시는 매장 위치를 입력하세요"
-                aria-label="Search"
+                  class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
+                  type="text"
+                  placeholder="찾으시는 매장 위치를 입력하세요"
+                  aria-label="Search"
                 />
               </div>
             </div>
@@ -396,15 +394,16 @@
                   </template>
                 </button>
               </li>
+              <!-- Notifications menu -->
             </ul>
           </div>
         </header>
-        <main class="h-full pb-16 overflow-y-auto">
+        <main class="h-full overflow-y-auto">
           <div class="container px-6 mx-auto grid">
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-            매장별 커피 판매관리 프로그램
+              매장별 판매액
             </h2>
             <!-- CTA -->
             <a
@@ -426,51 +425,82 @@
               </div>
               <span>알아보기 &RightArrow;</span>
             </a>
+            <!-- Cards -->
 
-            <!-- Big section cards -->
-            <h4
-              class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-            >
-              프로그램 소개
-            </h4>
-            <div
-              class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
-            >
-              <p class="text-sm text-gray-600 dark:text-gray-400">
-                더벤티 The Venti 매장별 커피 판매를 관리하기 위한 프로그램이다.
-              </p>
-            </div>
+            <!-- New Table -->
+            <div class="w-full overflow-hidden rounded-lg shadow-xs">
+              <div class="w-full overflow-x-auto">
+                <table class="w-full whitespace-no-wrap">
+                  <thead>
+                    <tr
+                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
+                    >
+                      <th class="px-4 py-3">매장코드</th>
+                      <th class="px-4 py-3">매장멸</th>
+                      <th class="px-4 py-3">매장별 판매액</th>
+                    </tr>
+                  </thead>
+                  <tbody
+                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
+                  >
+                  <%
+                    Connection conn;
+                    Statement stmt;
 
-            <!-- Responsive cards -->
+                    try{
+                      conn = Util.getConnection();
+                      stmt = conn.createStatement();
 
-            <!-- Cards with title -->
-            <h4
-              class="mb-4 text-lg font-semibold text-gray-600 dark:text-gray-300"
-            >
-              Coffee란?
-            </h4>
-            <div class="grid gap-6 mb-8 md:grid-cols-2">
-              <div
-                class="min-w-0 p-4 bg-white rounded-lg shadow-xs dark:bg-gray-800"
-              >
-                <h4 class="mb-4 font-semibold text-gray-600 dark:text-gray-300">
-                  커피의 역사
-                </h4>
-                <p class="text-gray-600 dark:text-gray-400">
-                  커피는 세계적으로 사랑받는 음료이자 문화적인 상징입니다. 커피의 역사는 오랜 세월 동안 다양한 변천사를 거쳐 왔습니다. 이 음료의 기원은 아프리카의 일부 지역으로 거슬러 올라갑니다. 커피 원두가 발견된 첫 기록은 수세기 전에 이후에 이슬람 세계로 전파되었습니다.
-                </p>
+                      String sql=
+                              "select b.scode, b.sname, to_char(sum(a.cost * c.amount),'999,999,999,999') cost "+
+                                      "from "+
+                                      "tbl_product_01 a, "+
+                                      "tbl_shop_01 b, "+
+                                      "tbl_salelist_01 c "+
+                                      "where b.scode = c.scode and c.pcode = a.pcode "+
+                                      "group by b.scode, b.sname "+
+                                      "order by 1";
+
+                      ResultSet rs = stmt.executeQuery(sql);
+
+                      while(rs.next()){
+                  %>
+
+                  <tr>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("scode")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("sname")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("cost")%>
+                    </td>
+                  </tr>
+
+                  <%
+                      }
+                    }
+                    catch (Exception e){
+                      e.printStackTrace();
+                    }
+                  %>
+                  </tbody>
+                </table>
               </div>
               <div
-                class="min-w-0 p-4 text-white bg-purple-600 rounded-lg shadow-xs"
+                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
               >
-                <h4 class="mb-4 font-semibold">
-                  커피의 효과
-                </h4>
-                <p>
-                  커피는 카페인을 비롯한 여러 활성 성분을 포함하고 있어 우리 몸에 다양한 영향을 줍니다. 카페인은 중추 신경 계통을 자극하여 졸음을 방지하고 깨어 있음을 유지하는 데 도움을 줍니다. 또한 대사를 촉진하여 신체적인 활동성을 증가시키고, 집중력과 기억력을 향상시키는 데 도움이 될 수 있습니다.
-                </p>
+                <span class="flex items-center col-span-3">
+                </span>
+                <span class="col-span-2"></span>
+                <!-- Pagination -->
+              
               </div>
             </div>
+
+            <!-- Charts -->
+
           </div>
         </main>
       </div>

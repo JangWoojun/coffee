@@ -1,19 +1,25 @@
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.Connection" %>
+<%@ page import="org.example.Util" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page language="java" contentType="text/html; UTF=8" pageEncoding="utf-8" %>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>매장별 판매액</title>
+    <title>판매현황</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./assets/css/tailwind.output.css" />
+    <link rel="stylesheet" href="assets/css/tailwind.output.css" />
     <script
       src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js"
       defer
     ></script>
-    <script src="./assets/js/init-alpine.js"></script>
+    <script src="assets/js/init-alpine.js"></script>
   </head>
   <body>
     <div
@@ -22,7 +28,7 @@
     >
       <!-- Desktop sidebar -->
       <aside
-        class="z-20 flex-shrink-0 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block"
+        class="z-20 hidden w-64 overflow-y-auto bg-white dark:bg-gray-800 md:block flex-shrink-0"
       >
         <div class="py-4 text-gray-500 dark:text-gray-400">
           <a
@@ -35,7 +41,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="index.html"
+                href="index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -59,7 +65,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_insert.html"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -81,7 +87,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                href="db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -101,9 +107,13 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_sale.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -124,13 +134,9 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="db_select_shop.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -185,7 +191,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="index.html"
+                href="index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -209,7 +215,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_insert.html"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -231,7 +237,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                href="db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -251,9 +257,13 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_sale.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -274,13 +284,9 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="db_select_shop.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -307,7 +313,7 @@
           >
             <!-- Mobile hamburger -->
             <button
-              class="p-1 mr-5 -ml-1 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
+              class="p-1 -ml-1 mr-5 rounded-md md:hidden focus:outline-none focus:shadow-outline-purple"
               @click="toggleSideMenu"
               aria-label="Menu"
             >
@@ -345,6 +351,7 @@
                 </div>
                 <input
                 id="searchInput"
+
                   class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                   type="text"
                   placeholder="찾으시는 매장 위치를 입력하세요"
@@ -388,7 +395,6 @@
                   </template>
                 </button>
               </li>
-              <!-- Notifications menu -->
             </ul>
           </div>
         </header>
@@ -397,7 +403,7 @@
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-              매장별 판매액
+              판매현황
             </h2>
             <!-- CTA -->
             <a
@@ -429,54 +435,70 @@
                     <tr
                       class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
                     >
+                      <th class="px-4 py-3">비번호</th>
+                      <th class="px-4 py-3">상품코드</th>
+                      <th class="px-4 py-3">판매날짜</th>
                       <th class="px-4 py-3">매장코드</th>
-                      <th class="px-4 py-3">매장멸</th>
-                      <th class="px-4 py-3">매장별 판매액</th>
+                      <th class="px-4 py-3">상품명</th>
+                      <th class="px-4 py-3">판매수량</th>
+                      <th class="px-4 py-3">총판매액</th>
                     </tr>
                   </thead>
                   <tbody
                     class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
                   >
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div
-                            class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
-                          >
-                            <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                              alt=""
-                              loading="lazy"
-                            />
-                            <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                            ></div>
-                          </div>
-                          <div>
-                            <p class="font-semibold">Hans Burger</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400">
-                              10x Developer
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        $ 863.45
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                        >
-                          Approved
-                        </span>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        6/10/2020
-                      </td>
-                    </tr>
+                  <%
+                    Connection conn;
+                    Statement stmt;
+
+                    try{
+                      conn = Util.getConnection();
+                      stmt = conn.createStatement();
+
+                      String sql=
+                              "select c.saleno, c.pcode, c.saledate, c.scode, a.name, c.amount, to_char(a.cost * c.amount,'999,999,999,999') cost "+
+                                      "from "+
+                                      "tbl_product_01 a, "+
+                                      "tbl_shop_01 b, "+
+                                      "tbl_salelist_01 c "+
+                                      "where c.scode = b.scode and c.pcode = a.pcode";
+
+                      ResultSet rs = stmt.executeQuery(sql);
+
+                      while(rs.next()){
+                  %>
+
+                  <tr>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getInt("saleno")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("pcode")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getDate("saledate")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("scode")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("name")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getInt("amount")%>
+                    </td>
+                    <td class="px-4 py-3 text-sm dark:text-gray-300">
+                      <%=rs.getString("cost")%>
+                    </td>
+                  </tr>
+
+                  <%
+                      }
+                    }
+                    catch (Exception e){
+                      e.printStackTrace();
+                    }
+                  %>
                   </tbody>
                 </table>
               </div>
@@ -510,6 +532,6 @@
           input.value = "";
         }
       });
-    </script>  
+    </script>   
   </body>
 </html>

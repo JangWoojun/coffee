@@ -1,9 +1,15 @@
+<%@ page import="java.sql.Connection" %>
+<%@ page import="java.sql.Statement" %>
+<%@ page import="java.sql.ResultSet" %>
+<%@ page import="org.example.Util" %>
+<%@ page language="java" contentType="text/html; UTF=8" pageEncoding="utf-8" %>
+
 <!DOCTYPE html>
 <html :class="{ 'theme-dark': dark }" x-data="data()" lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>판매현황</title>
+    <title>판매등록</title>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
       rel="stylesheet"
@@ -14,17 +20,6 @@
       defer
     ></script>
     <script src="./assets/js/init-alpine.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css"
-    />
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"
-      defer
-    ></script>
-    <script src="./assets/js/charts-lines.js" defer></script>
-    <script src="./assets/js/charts-pie.js" defer></script>
-    <script src="./assets/js/charts-bars.js" defer></script>
   </head>
   <body>
     <div
@@ -46,7 +41,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="index.html"
+                href="./index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -68,9 +63,13 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_insert.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -92,7 +91,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                href="./db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -112,13 +111,9 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="db_select_sale.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="./db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -141,7 +136,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_shop.html"
+                href="./db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -196,7 +191,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="index.html"
+                href="../index.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -218,9 +213,13 @@
           </ul>
           <ul>
             <li class="relative px-6 py-3">
+              <span
+                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
+                aria-hidden="true"
+              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_insert.html"
+                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
+                href="db_insert.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -242,7 +241,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_product.html"
+                href="../db_select_product.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -262,13 +261,9 @@
               </a>
             </li>
             <li class="relative px-6 py-3">
-              <span
-                class="absolute inset-y-0 left-0 w-1 bg-purple-600 rounded-tr-lg rounded-br-lg"
-                aria-hidden="true"
-              ></span>
               <a
-                class="inline-flex items-center w-full text-sm font-semibold text-gray-800 transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-100"
-                href="db_select_sale.html"
+                class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
+                href="../db_select_sale.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -291,7 +286,7 @@
             <li class="relative px-6 py-3">
               <a
                 class="inline-flex items-center w-full text-sm font-semibold transition-colors duration-150 hover:text-gray-800 dark:hover:text-gray-200"
-                href="db_select_shop.html"
+                href="../db_select_shop.jsp"
               >
                 <svg
                   class="w-5 h-5"
@@ -303,7 +298,7 @@
                   viewBox="0 0 24 24"
                   stroke="currentColor"
                 >
-                <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
+                  <path d="M4 6h16M4 10h16M4 14h16M4 18h16"></path>
                 </svg>
                 <span class="ml-4">매장별 판매액</span>
               </a>
@@ -355,8 +350,7 @@
                   </svg>
                 </div>
                 <input
-                id="searchInput"
-
+                  id="searchInput"
                   class="w-full pl-8 pr-2 text-sm text-gray-700 placeholder-gray-600 bg-gray-100 border-0 rounded-md dark:placeholder-gray-500 dark:focus:shadow-outline-gray dark:focus:placeholder-gray-600 dark:bg-gray-700 dark:text-gray-200 focus:placeholder-gray-500 focus:bg-white focus:border-purple-300 focus:outline-none focus:shadow-outline-purple form-input"
                   type="text"
                   placeholder="찾으시는 매장 위치를 입력하세요"
@@ -400,15 +394,16 @@
                   </template>
                 </button>
               </li>
+              <!-- Notifications menu -->
             </ul>
           </div>
         </header>
-        <main class="h-full overflow-y-auto">
+        <main class="h-full pb-16 overflow-y-auto">
           <div class="container px-6 mx-auto grid">
             <h2
               class="my-6 text-2xl font-semibold text-gray-700 dark:text-gray-200"
             >
-              판매현황
+              판매등록
             </h2>
             <!-- CTA -->
             <a
@@ -430,89 +425,168 @@
               </div>
               <span>알아보기 &RightArrow;</span>
             </a>
-            <!-- Cards -->
 
-            <!-- New Table -->
-            <div class="w-full overflow-hidden rounded-lg shadow-xs">
-              <div class="w-full overflow-x-auto">
-                <table class="w-full whitespace-no-wrap">
-                  <thead>
-                    <tr
-                      class="text-xs font-semibold tracking-wide text-left text-gray-500 uppercase border-b dark:border-gray-700 bg-gray-50 dark:text-gray-400 dark:bg-gray-800"
-                    >
-                      <th class="px-4 py-3">비번호</th>
-                      <th class="px-4 py-3">상품코드</th>
-                      <th class="px-4 py-3">판매날짜</th>
-                      <th class="px-4 py-3">매장코드</th>
-                      <th class="px-4 py-3">상품명</th>
-                      <th class="px-4 py-3">판매수량</th>
-                      <th class="px-4 py-3">총판매액</th>
-                    </tr>
-                  </thead>
-                  <tbody
-                    class="bg-white divide-y dark:divide-gray-700 dark:bg-gray-800"
-                  >
-                    <tr class="text-gray-700 dark:text-gray-400">
-                      <td class="px-4 py-3">
-                        <div class="flex items-center text-sm">
-                          <!-- Avatar with inset shadow -->
-                          <div
-                            class="relative hidden w-8 h-8 mr-3 rounded-full md:block"
-                          >
-                            <img
-                              class="object-cover w-full h-full rounded-full"
-                              src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
-                              alt=""
-                              loading="lazy"
-                            />
-                            <div
-                              class="absolute inset-0 rounded-full shadow-inner"
-                              aria-hidden="true"
-                            ></div>
-                          </div>
-                          <div>
-                            <p class="font-semibold">Hans Burger</p>
-                            <p class="text-xs text-gray-600 dark:text-gray-400">
-                              10x Developer
-                            </p>
-                          </div>
-                        </div>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        $ 863.45
-                      </td>
-                      <td class="px-4 py-3 text-xs">
-                        <span
-                          class="px-2 py-1 font-semibold leading-tight text-green-700 bg-green-100 rounded-full dark:bg-green-700 dark:text-green-100"
-                        >
-                          Approved
-                        </span>
-                      </td>
-                      <td class="px-4 py-3 text-sm">
-                        6/10/2020
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <div
-                class="grid px-4 py-3 text-xs font-semibold tracking-wide text-gray-500 border-t dark:border-gray-700 bg-gray-50 sm:grid-cols-9 dark:text-gray-400 dark:bg-gray-800"
-              >
-                <span class="flex items-center col-span-3">
-                </span>
-                <span class="col-span-2"></span>
-                <!-- Pagination -->
+            <!-- General elements -->
+            <form
+                    action="action.jsp"
+                    method="post"
+              class="px-4 py-3 mb-8 bg-white rounded-lg shadow-md dark:bg-gray-800"
+            >
+              <%
+                Connection conn = null;
+                Statement stmt = null;
+                String saleno = "";
+
+                try{
+                  conn = Util.getConnection();
+                  stmt = conn.createStatement();
+                  String sql = "select max(saleno) + 1 saleno from tbl_salelist_01";
+
+                  ResultSet rs = stmt.executeQuery(sql);
+
+                  rs.next();
+                  saleno = rs.getString("saleno");
+                }catch(Exception e){
+                  e.printStackTrace();
+                }
+              %>
+              <label class="block text-sm">
+                <span class="text-gray-700 dark:text-gray-400">판매번호</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ex) 100000"
+                  name="saleno"
+                  id="saleno" value="<%=saleno%>"
+                />
+              </label>
               
+              <label class="block text-sm mt-2">
+                <span class="text-gray-700 dark:text-gray-400">상품코드</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ex) AA00"
+                  name="pcode"
+                  type="text" id="pcode"
+                />
+              </label>
+
+              <label class="block text-sm mt-2">
+                <span class="text-gray-700 dark:text-gray-400">판매날짜</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ex) 20180101"
+                  name="saledate"
+                  type="text" id="saledate"
+                />
+              </label>
+
+              <label class="block text-sm mt-2">
+                <span class="text-gray-700 dark:text-gray-400">매장코드</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ex) S000"
+                  name="scode"
+                  type="text" id="scode"
+                />
+              </label>
+
+              <label class="block text-sm mt-2">
+                <span class="text-gray-700 dark:text-gray-400">판매수량</span>
+                <input
+                  class="block w-full mt-1 text-sm dark:border-gray-600 dark:bg-gray-700 focus:border-purple-400 focus:outline-none focus:shadow-outline-purple dark:text-gray-300 dark:focus:shadow-outline-gray form-input"
+                  placeholder="ex) 0"
+                  name="amount"
+                  type="text" id="amount"
+                />
+              </label>
+
+              <div class="mt-4 text-sm">
+                <div class="mt-2">
+                  <label
+                    class="inline-flex items-center text-gray-600 dark:text-gray-400"
+                  >
+                  <button
+                          type="submit"
+                          class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                          onclick="return insertCheck()"
+                >
+                  등록
+                </button>
+                  </label>
+                  <label
+                    class="inline-flex items-center ml-2 text-gray-600 dark:text-gray-400"
+                  >
+                  <span
+                  class="block w-full px-4 py-2 mt-4 text-sm font-medium leading-5 text-center text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple"
+                  onclick="return reset()"
+                  style="cursor: pointer"
+                >
+                  ↻
+                </span>
+                  </label>
+                </div>
               </div>
-            </div>
-
-            <!-- Charts -->
-
+              
+            </form>
           </div>
         </main>
       </div>
     </div>
     <script>
+      function reset(){
+        event.preventDefault();
+
+        document.getElementById('pcode').value = "";
+        document.getElementById('saledate').value = "";
+        document.getElementById('scode').value = "";
+        document.getElementById('amount').value = "";
+        //  frm_insert
+        return false;
+      }
+
+      function insertCheck(){
+        console.log("insertCheck")
+        if(document.getElementById('pcode').value==""){
+          alert("상품코드가 입력되지 않았습니다.");
+          event.preventDefault();
+
+          document.getElementById('pcode').pcode.focus();
+          return false;
+        };
+
+        if(document.getElementById('saledate').value==""){
+          alert("판매날짜 입력되지 않았습니다.");
+          event.preventDefault();
+
+          document.getElementById('saledate').saledate.focus();
+          return false;
+        };
+
+        if(document.getElementById('scode').value.value==""){
+          alert("매장코드가 입력되지 않았습니다.");
+          event.preventDefault();
+
+          document.getElementById('scode').scode.focus();
+          return false;
+        };
+
+        if(document.getElementById('amount').value.value==""){
+          alert("판매수량이 입력되지 않았습니다.");
+          event.preventDefault();
+
+          document.getElementById('amount').amount.focus();
+          return false;
+        };
+
+        success();
+        return true;
+      }
+
+
+      function success(){
+        alert("판매등록이 완료되었습니다.");
+      }
+
       const input = document.getElementById('searchInput');
     
       input.addEventListener('keypress', function(e) {
@@ -525,6 +599,6 @@
           input.value = "";
         }
       });
-    </script>   
+    </script>  
   </body>
 </html>
